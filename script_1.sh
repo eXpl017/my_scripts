@@ -15,11 +15,11 @@ echo -e "Current user sudo permissions:\n$(sudo -l)"
 
 
 # install basic tools
-tools_to_install=(man-db git curl xclip fzf)
+declare -a tools_to_install=(man-db git curl xclip fzf)
 echo -e "\nUpdating apt package lists."
 sudo apt update
 echo -e "Installing tools"
-for tool in "${tool_to_install[@]}"
+for tool in "${tools_to_install[@]}"
 do
     echo -e "\nInstalling $tool"
     sudo apt -y -qq install $tool
