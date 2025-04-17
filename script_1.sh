@@ -17,12 +17,12 @@ echo -e "Current user sudo permissions:\n$(sudo -l)"
 # install basic tools
 declare -a tools_to_install=(man-db git curl xclip fzf)
 echo -e "\nUpdating apt package lists."
-sudo apt update
+sudo apt-get update
 echo -e "Installing tools"
 for tool in "${tools_to_install[@]}"
 do
     echo -e "\nInstalling $tool"
-    sudo apt -y -qq install $tool
+    sudo apt-get -y -qq install $tool
 done
 
 # setting up shell integration for fzf
@@ -51,6 +51,6 @@ echo -e "Host github.com\n\tHostName github.com\n\tIdentityFile ~/.ssh/${GITHUB_
 
 # set git configs
 echo "Setting git configs (globally)"
-$(git config --global user.email $(IFS= read -p 'Enter email: ' && printf '%s' $REPLY || echo 'Read failed'))
-$(git config --global user.name $(IFS= read -p 'Enter username: ' && printf '%s' $REPLY || echo 'Read failed')
+git config --global user.email $(IFS= read -p 'Enter email: ' && printf '%s' $REPLY)
+git config --global user.name $(IFS= read -p 'Enter username: ' && printf '%s' $REPLY)
 git config --global core.editor vim && echo "Set core git editor to vim"
