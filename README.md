@@ -11,13 +11,13 @@ There are a few scripts, which check for tools I use, and install them if not pr
 They also add configuration files which I have stored in other repos.
 
 
-### Assumtions:
+### Assumtions
     - I am running these scripts on a debian-based distro
     - I have sudo permissions
     - My user is already created
 
 
-# Further additions
+### Further additions
 
 There are a lot of things I would like to add in here, including the below which I have in mind:
     - [ ] linking the scripts to the main script and ask for user input to install only what he wants
