@@ -20,9 +20,9 @@ They also add configuration files which I have stored in other repos.
 ### Further additions
 
 There are a lot of things I would like to add in here, including the below which I have in mind:
-    - [ ] linking the scripts to the main script and ask for user input to install only what he wants
-    - [ ] add python installation script (using apt)
-    - [ ] install pip, virtualenv, ipython3 and other modules I regularly use
-    - [ ] bash functions file, containing all custom functions I created to make life easier
-    - ...and hopefully many more
+- [ ] linking the scripts to the main script and ask for user input to install only what he wants
+- [ ] add python installation script (using apt)
+- [ ] install pip, virtualenv, ipython3 and other modules I regularly use
+- [ ] bash functions file, containing all custom functions I created to make life easier
+- [ ] ...and hopefully many more
 
