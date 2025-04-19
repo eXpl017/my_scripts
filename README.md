@@ -12,6 +12,7 @@ They also add configuration files which I have stored in other repos.
 
 
 ### Assumtions
+
     - I am running these scripts on a debian-based distro
     - I have sudo permissions
     - My user is already created
