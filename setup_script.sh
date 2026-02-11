@@ -65,7 +65,7 @@ function git_setup() {
     echo "[+] Creating github key-pair if not present..."
     if [[ ! -f ${GITHUB_KEYS_PATH}/github ]]; then
         echo -e "[-] Creating Github ssh keys at $GITHUB_KEYS_PATH. Please add the public key to Github."
-        ssh-keygen -t ecdsa -b 521 -f ${GITHUB_KEYS_PATH}
+        ssh-keygen -t ecdsa -b 521 -f ${GITHUB_KEYS_PATH}/github
     else
         echo "[-] Keys exist, proceeding..."
     fi
@@ -87,7 +87,7 @@ function vim_setup() {
     # backup current vim config, create if not present
     if [[ -d ${VIM_CONFIG_PATH} ]]; then
         echo "Backing up current vim config"
-        mv ${VIM_CONFIG_PATH} ${USER_HOME}/.vim.bak.$(date +%Y-%m-%d_%H-%M-%S)
+        mv ${VIM_CONFIG_PATH} ${USER_HOME}/.vim.bak.$(date +%F)
     fi
 
     # creating fresh .vim directory tree with subdirs for config
@@ -134,11 +134,14 @@ echo -e "[+] Current user sudo permissions:\n$(sudo -l)"
 echo
 
 # system info
-echo -e "[+] Basic system version info:\n$(cat /proc/version)"
+echo "[+] Basic system version info:"
+echo -e "[-] /proc/version\n\"$(</proc/version)\""
+echo -e "[-] uname -a\n\"$(uname -a)\""
+echo -e "[-] /etc/os-release\n\"$(</etc/os-release)\""
 echo
 
 # install basic tools
-declare -a tools_to_install=(man-db curl xclip fzf tmux vim bat)
+declare -a tools_to_install=(curl xclip fzf tmux vim bat)
 echo -e "[+] Updating apt package lists."
 sudo apt-get -qq update
 print_div
@@ -150,6 +153,7 @@ do
     else
         echo "\n[-] Installing $tool"
         sudo apt-get -y -qq install $tool
+        echo "[-] Done"
     fi
     print_div
 done
@@ -187,11 +191,6 @@ echo 'alias cat="bat --pager=never --show-all"' >> ${BASHRC_PATH}
 # setting vim as default editor
 echo "VISUAL=vim" >> ${BASHRC_PATH}
 echo "EDITOR=vim" >> ${BASHRC_PATH}
-
-echo "Done.\nApplying changes..."
-
-# source bashrc
-# source ${BASHRC_PATH}
 
 echo "Done."
 
