@@ -48,7 +48,7 @@ function git_setup() {
         echo "[+] Git present, proceeding"
     else
         echo "[+] Installing git..."
-        apt install -qq -y git-all
+        apt install -qq -y git
     fi
 
     set_git_configs
@@ -113,6 +113,12 @@ function vim_setup() {
 }
 
 
+function lazydocker_setup() {
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh -O
+    bash install_update_linux.sh
+}
+
+
 ##### SCRIPT BEGIN #####
 
 
@@ -141,7 +147,7 @@ echo -e "[-] /etc/os-release\n\"$(</etc/os-release)\""
 echo
 
 # install basic tools
-declare -a tools_to_install=(curl xclip fzf tmux vim bat)
+declare -a tools_to_install=(curl xclip fzf tmux vim bat lazygit)
 echo -e "[+] Updating apt package lists."
 sudo apt-get -qq update
 print_div
@@ -194,3 +200,7 @@ echo "EDITOR=vim" >> ${BASHRC_PATH}
 
 echo "Done."
 
+# ADD universal-ctags INSTALLATION
+# NEED IT FOR USING WITH VIM
+# NOTE - need to install autoconf, automake, and pkg-config for this 
+# `sudo apt install autoconf automake pkg-config`
