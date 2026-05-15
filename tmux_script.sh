@@ -1,6 +1,17 @@
 #!/bin/bash
 
-set -e
+
+function tmux_setup {
+
+
+
+
+
+
+}
+
+
+
 
 if ( ! command -v tmux ); then
     echo "Tmux not available, installing..."

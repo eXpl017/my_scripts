@@ -1,0 +1,36 @@
+eval "$(zoxide init bash)"
+
+
+##### zoxide env vars
+
+export _ZO_EXCLUDE_DIRS="/tmp"
+export _ZO_EXCLUDE_PATHS=".git:.venv"
+
+##### zoxide fzf integration
+
+zi() {
+  local dir
+  dir=$(zoxide query -l | fzf --preview 'ls -la {}') && z "$dir"
+}
+
+zfp() {
+  local dir
+  dir=$(zoxide query -l | fzf --preview 'tree -L 2 {}')
+  [ -n "$dir" ] && z "$dir" && ls -la
+}
+
+zgit() {
+  local dir
+  dir=$(zoxide query -l | xargs -I {} sh -c 'test -d {}/.git && echo {}' | fzf)
+  [ -n "$dir" ] && z "$dir"
+}
+
+##### yazi func
+
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+    command rm -f -- "$tmp"
+}

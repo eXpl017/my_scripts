@@ -37,7 +37,7 @@ echo -e "[-] /etc/os-release\n\"$(</etc/os-release)\""
 echo
 
 # install basic tools
-declare -a tools_to_install=(curl xclip fzf tmux vim bat)
+declare -a tools_to_install=(curl xclip tmux vim jq yq ripgrep)
 echo -e "[+] Updating apt package lists."
 sudo apt-get -qq update
 print_div
@@ -75,12 +75,6 @@ print_div
 ##### BASHRC CHANGES #####
 
 echo "[+] Making required changes to bashrc..."
-
-# setting up shell integration for fzf
-echo 'eval "$(fzf --bash)"' >> ${BASHRC_PATH}
-
-# replace cat with bat
-echo 'alias cat="bat --pager=never --show-all"' >> ${BASHRC_PATH}
 
 # setting vim as default editor
 echo "VISUAL=vim" >> ${BASHRC_PATH}
